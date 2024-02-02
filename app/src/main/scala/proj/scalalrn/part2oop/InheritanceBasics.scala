@@ -34,10 +34,11 @@ object InheritanceBasics extends App {
 
   class Primate(name: String, habitat: String) {
 
-    final def defaultName = "ape"
-    final def defaultHabitat = "jungle"
-    def this(name: String) = this(name, defaultHabitat) // auxiliary constructor - alternative to default value for constructor args
-    def this() = this(defaultName, defaultHabitat) // auxiliary constructor - alternative to default value for constructor args
+    val defaultName = "ape2"
+    val defaultHabitat = "jungle2"
+
+    // def this(name: String) = this(name, defaultHabitat) // auxiliary constructor - alternative to default value for constructor args
+    // def this() = this(defaultName, defaultHabitat) // auxiliary constructor - alternative to default value for constructor args
   }
 
   class Primate2(name: String = "ape", habitat: String = "jungle")
