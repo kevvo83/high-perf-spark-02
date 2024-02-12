@@ -31,7 +31,7 @@ object InheritanceExercise extends App {
 
     def addElem(newElem: Int): Cons[Int] = new Cons(newElem, this)
 
-    def toString2: String = if (t.isEmpty) h + t.toString2 else s"$h, " + t.toString2
+    def toString2: String = if (t.isEmpty) s"$h" + t.toString2 else s"$h, " + t.toString2
 
     @tailrec
     private def impl(acc: String, t: MyList[Int]): String =
