@@ -24,6 +24,11 @@ object Generics extends App {
     def flatMap[B](tx: MyTransformer[A, MyList[B]]): MyList[B]
 
     def ++[B >: A](list: MyList[B]): MyList[B] // TODO: Why is the type B >: A ?
+
+    def foreach(f: A => Unit): Unit
+    def sort(f: (A, A) => Int): MyList[A]
+    def zipWith[B, C](l: MyList[B], f: (A, B) => C): MyList[C]
+    def fold[B](agg: B)(f: (A, B) => B): B
   }
 
   object Empty extends MyList[Nothing] {
@@ -36,6 +41,10 @@ object Generics extends App {
     def map[B](tx: MyTransformer[Nothing, B]): MyList[B] = this
     def flatMap[B](tx: MyTransformer[Nothing, MyList[B]]): MyList[B] = this
     def ++[B >: Nothing](list: MyList[B]): MyList[B] = list
+    def foreach(f: Nothing => Unit): Unit = {}
+    def sort(f: (Nothing, Nothing) => Int): MyList[Nothing] = this
+    def zipWith[B, C](l: MyList[B], f: (Nothing, B) => C): MyList[C] = this
+    def fold[B](agg: B)(f: (Nothing, B) => B): B = agg
   }
 
   class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
@@ -68,11 +77,25 @@ object Generics extends App {
     def flatMap[B](tx: MyTransformer[A, MyList[B]]): MyList[B] =
       tx.transform(head) ++ tail.flatMap(tx)
 
+    def foreach(func: A => Unit): Unit = {
+      func(h)
+      tail.foreach(func)
+    }
+
+    def sort(f: (A, A) => Int): MyList[A] = ??? // TODO: Implement the stupid fucking sort function
+
+    def zipWith[B, C](l: MyList[B], f: (A, B) => C): MyList[C] =
+      new Cons(f(head, l.head), tail.zipWith(l.tail, f))
+
+    def fold[B](agg: B)(f: (A, B) => B): B = {
+      tail.fold(f(head, agg))(f)
+    }
   }
 
   // TEST DATA
   val listSuperTiny = new Cons[Int](1, Empty)
   val listTiny = new Cons[Int](1, new Cons(2, Empty))
+  val listTinyToBeZipped = new Cons[Int](10, new Cons(20, Empty))
   val list1 = new Cons[Int](1, new Cons(2, new Cons(3, new Cons(4,
     new Cons(5, new Cons(6, new Cons(7, new Cons(8, new Cons(9, new Cons(10, new Cons(11, Empty)))))))))))
   println(list1.toString2)
@@ -110,5 +133,24 @@ object Generics extends App {
       listSuperTiny.flatMap(flatMapTransformer).tail.head == 1 &&
       listSuperTiny.flatMap(flatMapTransformer).tail.tail == Empty,
     s"FlatMap on Super Tiny list doesn't return the right value - here's what it returned ${listSuperTiny.flatMap(flatMapTransformer)}"
+  )
+
+  println("HOFs exercises for foreach, sort, zipWith and fold")
+  println("foreach()")
+  listSuperTiny.foreach((x: Int) => println(x))
+  list1.foreach((x: Int) => println(x))
+
+  println("sort")
+  // println(list1.sort((a: Int, b: Int) => a - b).toString2)
+
+  println("zipWith")
+  println(listTiny.zipWith(listTinyToBeZipped, (a: Int, b: Int) => a+b).toString2)
+  println(listTiny.zipWith(listTinyToBeZipped, (a: Int, b: Int) => a.toString + "_" + b.toString).toString2)
+
+  println("fold")
+  println(listTiny.fold(10)((a, b) => a + b))
+  assert(
+    listTiny.fold(10)((a, b) => a + b) == 13,
+    "Fold result should be 13"
   )
 }

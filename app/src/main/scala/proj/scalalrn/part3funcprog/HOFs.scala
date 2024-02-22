@@ -15,18 +15,6 @@ object HOFs extends App {
 
   println(nTimesBetter((x: Int) => x + 1, 2)(10))
 
-  trait MyList2[+A] extends MyList[A] {
-    def foreach(f: A => Unit): Unit
-    def sort(f: (A, A) => Int): MyList[A]
-  }
-
-  class Cons2[+A](head: A, tail: MyList2[A]) extends Cons(head, tail) with MyList2[A] {
-    def foreach(f: A => Unit): Unit =
-      if (isEmpty) f(head)
-      else tail.foreach(f)
-    def sort(f: (A, A) => Int): MyList[A] = ???
-  }
-
   def nTimes(f: Int => Int, numberOfTimesToIncrement: Int, num: Int): Int =
     if (numberOfTimesToIncrement <= 0) num
     else nTimes(f, numberOfTimesToIncrement - 1, f(num))
@@ -55,18 +43,35 @@ object HOFs extends App {
       nTimesBetter2((x: Int) => x * 4, 3)(5) == 320
   )
 
-  // Example here - https://www.scala-exercises.org/fp_in_scala/getting_started_with_functional_programming
-  def isSorted[A](arr: Array[A], ordering: (A, A) => Boolean): Boolean = {
-    def impl(a: Array[A], acc: Boolean) = a match {
-      case h :: t => impl(t, if (ordering(h, t.head)) acc && true else false)
-      case _ => acc
-    }
-    impl(arr, true)
-  }
+  def toCurry(f: (Int, Int) => Int): (Int => Int => Int) =
+    (x: Int) => (y: Int) => f(x, y)
 
+  def fromCurry(f: (Int => Int => Int)): (Int, Int) => Int =
+    (a: Int, b: Int) => f(a)(b)
+
+  def superAdder = toCurry(_ + _)
   assert(
-    isSorted(new Array[Int](1, 2, 3, 4, 5), (a: Int, b: Int) => if (a > b) true else false)
+    superAdder(10)(2) == 12,
+    "SuperAdder(10)(2) Result should be 12"
   )
 
-  List(1,2 3,5)
+  def compose(f: Int => Int, g: Int => Int): Int => Int =
+    (elem: Int) => f(g(elem))
+
+  assert(
+    compose(_ * 10, _ * 2)(13) == 260,
+    "Compose(_*10, _*2)(13) result should be 260"
+  )
+
+  assert(
+    andThen(_ * 10, _ + 2)(13) == 132,
+    "Compose(_*10, _*2)(13) result should be 132"
+  )
+
+
+  def andThen(f: Int => Int, g: Int => Int): Int => Int =
+    (x: Int) => g(f(x))
+
+  def compose2[A, B, C](f: B => C, g: A => B): A => C =
+    (input: A) => f(g(input))
 }
