@@ -120,20 +120,6 @@ object ThreadComms extends App {
     }
   })
 
-//  threadPool.execute(() => {
-//    while (true) {
-//      consumer.get()
-//      Thread.sleep(randomGen.nextInt(500))
-//    }
-//  })
-//
-//  threadPool.execute(() => {
-//    while (true) {
-//      producer.set(randomGen.nextInt(50))
-//      Thread.sleep(randomGen.nextInt(500))
-//    }
-//  })
-
   threadPool.shutdown()
 
 }
