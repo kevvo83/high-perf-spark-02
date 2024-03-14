@@ -1,9 +1,8 @@
-package proj.scalaadvlrn
+package proj.scalaadvlrn.concurrency
 
 import scala.collection.mutable
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import java.util.Random
+import scala.concurrent.Future
 
 object Futures extends App {
 

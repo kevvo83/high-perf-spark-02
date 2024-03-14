@@ -1,13 +1,11 @@
-package proj.scalaadvlrn
+package proj.scalaadvlrn.concurrency
+
+import com.typesafe.scalalogging.Logger
 
 import java.util.Random
 import scala.collection.mutable
-import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
-import com.typesafe.scalalogging.Logger
-
-import java.util.concurrent.TimeUnit
-import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 
 object Futures2 extends App {
 

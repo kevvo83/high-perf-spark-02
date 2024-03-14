@@ -1,4 +1,4 @@
-package proj.scalaadvlrn
+package proj.scalaadvlrn.concurrency
 
 import java.util.concurrent.Executors
 
