@@ -1,4 +1,4 @@
-package proj.scalaadvlrn
+package proj.scalaadvlrn.curriesandfunctions
 
 object PartialFunctions extends App {
 

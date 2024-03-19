@@ -1,8 +1,7 @@
-package proj.scalaadvlrn
+package proj.scalaadvlrn.concurrency
 
 import com.typesafe.scalalogging.Logger
 
-import java.time.Duration
 import java.util.Random
 import java.util.concurrent.Executors
 import scala.collection.mutable

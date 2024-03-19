@@ -10,6 +10,7 @@
    * References:
      * [Scala 2](https://rockthejvm.com/p/scala-old)
      * [Scala 2 Advanced](https://rockthejvm.com/p/scala-advanced-old)
+     * [Bealdung-call byname/byvalue](https://www.baeldung.com/scala/parameters-by-value-by-name)
 
 ## Scala content
 
