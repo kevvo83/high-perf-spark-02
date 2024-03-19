@@ -18,6 +18,8 @@
 * [Concurrency](https://github.com/kevvo83/high-perf-spark-02/tree/main/app/src/main/scala/proj/scalaadvlrn/concurrency)
 * [Syntax sugars, Partial Functions](https://github.com/kevvo83/high-perf-spark-02/tree/main/app/src/main/scala/proj/scalaadvlrn)
 * Variance
+* Lazy evaluation (Call-by-name vs. call-by-value vs. call-by-need)
+* Curried functions and partial functions
 
 ## Spark content
 * [To be fleshed out](https://github.com/kevvo83/high-perf-spark-02/tree/main/app/src/main/scala/proj/scalasparklrn)
