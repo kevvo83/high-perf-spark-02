@@ -7,6 +7,10 @@ junit-v4-v13-v2-v13 = "3.2.2.0"
 scala-library = "2.13.14"
 scala-xml-v2-v13 = "1.2.0"
 scalatest-v2-v13 = "3.2.19"
+sparkcore-v2-v13 = "3.5.0"
+sparksql-v2-v13 = "3.5.0"
+scala-logging-v3 = "3.9.5"
+logback-classic = "1.5.0"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -14,3 +18,7 @@ junit-v4-v13-v2-v13 = { module = "org.scalatestplus:junit-4-13_2.13", version.re
 scala-library = { module = "org.scala-lang:scala-library", version.ref = "scala-library" }
 scala-xml-v2-v13 = { module = "org.scala-lang.modules:scala-xml_2.13", version.ref = "scala-xml-v2-v13" }
 scalatest-v2-v13 = { module = "org.scalatest:scalatest_2.13", version.ref = "scalatest-v2-v13" }
+spark-core-v2-v13 = { module = "org.apache.spark:spark-core_2.13", version.ref = "sparkcore-v2-v13" }
+spark-sql-v2-v13 = { module = "org.apache.spark:spark-sql_2.13", version.ref = "sparksql-v2-v13" }
+scala-logging-v3 = { module = "com.typesafe.scala-logging:scala-logging_3", version.ref = "scala-logging-v3" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-classic" }
