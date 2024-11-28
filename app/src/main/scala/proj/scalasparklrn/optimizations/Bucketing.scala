@@ -10,7 +10,7 @@ object Bucketing extends App {
     .builder().master("local")
     .appName("Bucketing")
     .config("spark.eventLog.enabled", value = true)
-    .config("spark.eventLog.dir", "/Users/kevin/Downloads/spark-history-server/eventLogs/")
+    .config("spark.eventLog.dir", "/Users/kevinlawrence/Downloads/spark-history-server/eventLogs/")
     .getOrCreate()
 
   val flightsDF = spark.read.option("inferSchema", "true").
